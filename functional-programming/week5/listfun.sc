@@ -1,3 +1,5 @@
+package week5
+
 object listfun {
   val nums = List(2, -4, 5, 7, 1)
   val fruits = List("apple", "orange", "pineapple", "banana")
@@ -25,14 +27,19 @@ object listfun {
     case Nil      => Nil
     case x :: xs1 =>
       val (first, rest) = xs span (y => y == x)
-      first:: pack(rest)
+      first :: pack(rest)
   }
+  // List[List[String]] = List(List(a, a, a), List(b), List(c, c), List(a))
+
 
   def encode[T](xs: List[List[T]]): List[(T, Int)] = xs match {
     case Nil => Nil
     case x :: xs1 => (x.head, x.length) :: encode(xs1)
   }
+  // List[(String, Int)] = List((a,3), (b,1), (c,2), (a,1))
+
 
   def encode1[T](xs: List[T]): List[(T, Int)] =
     pack(xs) map (ys => (ys.head, ys.length))
 }
+  // List[(String, Int)] = List((a,3), (b,1), (c,2), (a,1))
