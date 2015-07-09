@@ -1,9 +1,4 @@
 /**
- * Created by ricky on 7/9/15.
- */
-
-
-/**
  * This file converts an input string of integers into phrases of words.
  * Created by ricky on 7/9/15.
  */
@@ -45,4 +40,3 @@ object x {
     */
   }
 }
-
