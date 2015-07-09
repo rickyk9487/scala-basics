@@ -1,4 +1,4 @@
-# Data Science things to learn in Scala
+# Data Science things to learn in Scala / Spark / IntelliJ / Java
 
 ## Pipeline Organization
 
