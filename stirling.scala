@@ -1,5 +1,5 @@
 // For computing Stirling's estimate of n! up to n=2000
-import scala.math._
+import scala.math.{Pi, pow, exp}
 import scala.collection.mutable
 
 def square(x: BigDecimal): BigDecimal =
@@ -30,7 +30,7 @@ def power(r: BigDecimal, n: Int): BigDecimal = {
 def stirling(year: Int): BigDecimal = {
   val bigYear = BigDecimal(year)
   val denom = BigDecimal(exp(1))
-  val sqrt = pow(2 * math.Pi * year, 0.5)
+  val sqrt = pow(2 * Pi * year, 0.5)
   power(bigYear / denom, year) * sqrt
 }
 
@@ -54,6 +54,8 @@ println("2000! = " + factorial(2000))
 println("2000! ~ " + stirling(2000))
 println("2001! = " + factorial(2001))
 println("2001! ~ " + stirling(2001) + ", dafuq?")
+
+
 // 100! = 9.332621544394415268169923885626670E+157
 // 100! ~ 9.324847625269423977235385604061917E+157
 // 300! = 3.060575122164406360353704612972684E+614
