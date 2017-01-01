@@ -27,11 +27,13 @@ def power(r: BigDecimal, n: Int): BigDecimal = {
   prod
 }
 
+def sqrt(x: Double): Double = pow(x, 0.5)
+
 def stirling(year: Int): BigDecimal = {
   val bigYear = BigDecimal(year)
   val denom = BigDecimal(exp(1))
-  val sqrt = pow(2 * Pi * year, 0.5)
-  power(bigYear / denom, year) * sqrt
+  val root = BigDecimal(sqrt(2 * Pi * year))
+  power(bigYear / denom, year) * root
 }
 
 def factorial(n: BigDecimal): BigDecimal = {
@@ -54,6 +56,7 @@ println("2000! = " + factorial(2000))
 println("2000! ~ " + stirling(2000))
 println("2001! = " + factorial(2001))
 println("2001! ~ " + stirling(2001) + ", dafuq?")
+
 
 
 // 100! = 9.332621544394415268169923885626670E+157
