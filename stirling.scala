@@ -1,25 +1,26 @@
 // For computing Stirling's estimate of n! up to n=2000
+// It uses exponentiation by repeated squaring for efficiency
+// https://en.wikipedia.org/wiki/Exponentiation_by_squaring
 import scala.math.{Pi, pow, exp}
 import scala.collection.mutable
 
-def square(x: BigDecimal): BigDecimal =
-  x * x
+def square(x: BigDecimal): BigDecimal = x * x
 
 def binaryInt(n: Int): List[Char] = 
-  n.toBinaryString.toList.reverse // n in binary
+  // n in binary
+  n.toBinaryString.toList.reverse
 
 def power(r: BigDecimal, n: Int): BigDecimal = {
   val binaryn = binaryInt(n)
   val log2n = binaryn.length - 1
-  val myMap = mutable.Map(0 -> BigDecimal(n % 2 + 1)) 
+  var (rOld, rNew, prod) = (r, r, BigDecimal(n % 2 + 1))
+  var myMap = mutable.Map(0 -> prod) 
   // 1 or 2 depending on whether n is odd or even
-  var rnew = r
-  var rold = r
-  var prod = myMap(0) 
-  for (i <- (1 to log2n)) { // repeated squaring
-    myMap(i) = square(rnew)
-    rnew = square(rold)
-    rold = rnew
+  for (i <- (1 to log2n)) {
+    // Loop through repeated squaring 
+    myMap(i) = square(rNew)
+    rNew = square(rOld)
+    rOld = rNew
     if (binaryn(i).toString == "1") {
       prod *= myMap(i)
     }
@@ -29,13 +30,15 @@ def power(r: BigDecimal, n: Int): BigDecimal = {
 
 def sqrt(x: Double): Double = pow(x, 0.5)
 
-def stirling(year: Int): BigDecimal = {
-  val bigYear = BigDecimal(year)
+ // Stirling's approximation for factorial: n! ~ sqrt(2 * pi * n) * (n / e) ^ n
+def stirling(natural: Int): BigDecimal = {
+  val bigDecNatural = BigDecimal(natural)
   val denom = BigDecimal(exp(1))
-  val root = BigDecimal(sqrt(2 * Pi * year))
-  power(bigYear / denom, year) * root
+  val root = BigDecimal(sqrt(2 * Pi * natural))
+  power(bigDecNatural / denom, natural) * root
 }
 
+// Tail-recursive function that computes n!
 def factorial(n: BigDecimal): BigDecimal = {
     def factorialAccumulator(acc: BigDecimal, n: BigDecimal): BigDecimal = {
         if (n == 0) acc
