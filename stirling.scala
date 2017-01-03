@@ -58,7 +58,7 @@ println("1500! ~ " + stirling(1500))
 println("2000! = " + factorial(2000))
 println("2000! ~ " + stirling(2000))
 println("2001! = " + factorial(2001))
-println("2001! ~ " + stirling(2001) + ", dafuq?")
+println("2001! ~ " + stirling(2001) + ", why?")
 
 
 
